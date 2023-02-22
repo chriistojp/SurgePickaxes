@@ -2,3 +2,5 @@ name: SurgePickaxes
 version: '${project.version}'
 main: me.christo.surgepickaxes.Main
 api-version: 1.19
+commands:
+  pickaxe:
