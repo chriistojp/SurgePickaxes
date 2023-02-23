@@ -42,6 +42,7 @@ public class MongoHandler {
         try {
             Document document = new Document("name", p.getName())
                     .append("level", 0)
+                    .append("xp", 0)
                     .append("efficiency", 0)
                     .append("fortune", 0)
                     .append("gemfinder", 0)

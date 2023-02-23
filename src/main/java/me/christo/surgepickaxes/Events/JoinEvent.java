@@ -12,7 +12,7 @@ public class JoinEvent implements Listener {
     public void onJoin(PlayerJoinEvent e) {
 
         Player player = e.getPlayer();
-        if (!MongoHandler.checkIfDocumentExists(player)) {
+        if(!MongoHandler.checkIfDocumentExists(player)) {
             MongoHandler.createNewDocument(player);
         }
 
