@@ -17,14 +17,68 @@ public class PickaxeInventory {
         Gui gui = new Gui("Pickaxe", 27);
         HeadAPI.getHeadById(14673).get().getItem(p.getUniqueId());
         gui.fill(Material.BLACK_STAINED_GLASS_PANE, " ");
-        gui.i(11, HeadAPI.getHeadById(14673).get().getItem(p.getUniqueId()), "&d&lEnchantments",
-                Util.formatString(50 ,"", "&7Here you can upgrade your pickaxe. Pickaxe upgrades", "&7max out at level 5. To unlock each level your pickaxe",
-                "&7level must first meet that specified level.", "&7For example you cannot buy &dFortune 3 &7without", "&7your pickaxe being &dLevel 3.", "", "&7Information about each enchantmenet can be found on",
-                "&7the &dnext page.", "", "&7&o((Right-Click to Open))"));
 
-        gui.i(13, HeadAPI.getHeadById(14661).get().getItem(p.getUniqueId()), "&6&lInformation",
-                Util.formatString(50, "", "&7Here you can do things like &6upgrade your pickaxe.", "&7Upgrading your pickaxe can help you gain", "&7resources and island value faster.", "&7Pickaxe enchantments only work on &6Ore-Field &7generated blocks.", "", "&7If you have any questions feel free", "&6to ask a staff member."));
+        String[] enchantLore = {
+                "",
+                "&7Here you can upgrade your pickaxe. Pickaxe upgrades",
+                "&7max out at level 5. To unlock each level your pickaxe",
+                "&7must first meet that specified level. For example you",
+                "&7cannot buy &dFortune 3 &7without your pickaxe being",
+                "&dLevel 3.",
+                "",
+                "&7Information about each enchantment can be found on the",
+                "&dnext page.",
+                "",
+                "&7&o(( Right-Click to Open ))"
+        };
 
+        String[] informationLore = {
+                "",
+                "&7Here you can do things like &6upgrade &7your pickaxe.",
+                "&7Upgrading your pickaxe can help you gain resources",
+                "&7and island value faster. Custom pickaxe enchantments only work",
+                "on &6Ore-Field &7generated blocks.",
+                "",
+                "&7If you have any questions feel free to &6ask a staff member."
+
+
+
+        };
+
+        String[] experienceLore = {
+                "",
+                "&7Different block give different amounts of &eexperience",
+                "&7when you break them.",
+                "",
+                "&7Stone - &e1",
+                "&8Coal Ore &7- &e5",
+                "&fIron Ore &7- &e10",
+                "&6Gold Ore &7- &e20",
+                "&bDiamond Ore &7- &e50",
+                "&aEmerald Ore &7- &e100",
+                "",
+                "&f&lIron Block &7- &e125",
+                "&6&lGold Block &7- &e150",
+                "&b&lDiamond Block &7- &e200",
+                "&a&lEmerald Block &7- &e300"
+
+        };
+
+        gui.i(11, HeadAPI.getHeadById(14673).get().getItem(p.getUniqueId()), "&d&lEnchantments", enchantLore);
+
+
+
+        gui.i(13, HeadAPI.getHeadById(14661).get().getItem(p.getUniqueId()), "&6&lInformation", informationLore);
+
+        gui.i(15, HeadAPI.getHeadById(14832).get().getItem(p.getUniqueId()), "&e&lExperience", experienceLore);
+
+
+        gui.onClick(e -> {
+            e.setCancelled(true);
+            if(e.getSlot() == 11) {
+                PickaxeUpgradeInventory.open(p);
+            }
+        });
 
 
         gui.show(p);
