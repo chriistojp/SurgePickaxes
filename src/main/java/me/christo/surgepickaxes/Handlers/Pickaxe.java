@@ -30,7 +30,9 @@ public class Pickaxe {
 
     public int getPickaxeLevel() {
 
-        return MongoConnectionPool.getInstance().getValue(player, "level");
+        NBTManager manager = new NBTManager(player.getItemInHand());
+
+        return manager.getNBT("level", PersistentDataType.INTEGER);
 
     }
 
@@ -49,11 +51,12 @@ public class Pickaxe {
 
     public int getEnchantmentLevel(Player p, String enchantment) {
 
-        return MongoConnectionPool.getInstance().getValue(p, enchantment);
+        NBTManager manager = new NBTManager(p.getItemInHand());
+        return manager.getNBT(enchantment, PersistentDataType.INTEGER);
     }
     public int addEnchantmentLevel(String enchantment) {
 
-        try (MongoClient client = MongoConnectionPool.acquire()) {
+        try (MongoClient client = MongoConnection.acquire()) {
             MongoDatabase database = client.getDatabase("Pickaxes");
             MongoCollection<org.bson.Document> collection = database.getCollection("Pickaxes");
             org.bson.Document query = new org.bson.Document("name", "John Doe");
@@ -71,13 +74,13 @@ public class Pickaxe {
 
         //if pickaxe level > enchantment level [available]
 
+        if(getEnchantmentLevel(player, "level") > getEnchantmentLevel(player, enchantment)) {
+            return true;
+        } else {
+            return false;
+        }
 
 
-
-
-
-
-        return false;
     }
 
     public boolean hasPurchasedEnchantment(String enchantment) {
@@ -107,7 +110,6 @@ public class Pickaxe {
         nbtManager.setNBT("rampage", PersistentDataType.INTEGER, 0);
         nbtManager.setNBT("gemfinder", PersistentDataType.INTEGER, 0);
         nbtManager.setNBT("greed", PersistentDataType.INTEGER, 0);
-
 
 
 

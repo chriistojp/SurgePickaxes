@@ -79,6 +79,7 @@ public class PickaxeInventory {
         gui.onClick(e -> {
             e.setCancelled(true);
             if(e.getSlot() == 11) {
+                gui.close(p);
                 PickaxeUpgradeInventory.open(p);
             }
         });

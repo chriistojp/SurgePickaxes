@@ -2,13 +2,9 @@ package me.christo.surgepickaxes;
 
 
 
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoDatabase;
 import me.christo.surgepickaxes.Commands.PickaxeCommand;
 import me.christo.surgepickaxes.Events.JoinEvent;
 import me.christo.surgepickaxes.Events.RightClickEvent;
-import me.christo.surgepickaxes.Handlers.MongoConnectionPool;
-import me.christo.surgepickaxes.Handlers.MongoHandler;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.logging.Level;
@@ -24,6 +20,11 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+//        Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
+//        mongoLogger.setLevel(Level.SEVERE);
+//
+//        Logger rootLogger = Logger.getLogger("");
+//        rootLogger.setLevel(Level.OFF);
 
         //pasword 1BHVHJ1oKtIicI7l
 
@@ -32,6 +33,7 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RightClickEvent(), this);
         getCommand("pickaxe").setExecutor(new PickaxeCommand());
         this.getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+
 
 
 
