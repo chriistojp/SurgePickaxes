@@ -8,6 +8,7 @@ import me.christo.surgepickaxes.Utils.Gui;
 import me.christo.surgepickaxes.Utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -51,6 +52,13 @@ public class PickaxeUpgradeInventory {
 
         gui.i(11, getItem(p, HeadAPI.getHeadById(49711).get().getItem(p.getUniqueId()), "efficiency", "&e", "&7Efficiency allows you to break blocks faster."));
         gui.i(12, getItem(p, HeadAPI.getHeadById(49711).get().getItem(p.getUniqueId()), "fortune", "&5", "&7Fortune allows you to receive extra drops from ores."));
+        gui.i(13, getItem(p, HeadAPI.getHeadById(10178).get().getItem(p.getUniqueId()), "gemfinder", "&2", "&7Fortune allows you to receive extra drops from ores."));
+        gui.i(14, getItem(p, HeadAPI.getHeadById(10250).get().getItem(p.getUniqueId()), "shatterproof", "&b", "&7Fortune allows you to receive extra drops from ores."));
+        gui.i(15, getItem(p, HeadAPI.getHeadById(10250).get().getItem(p.getUniqueId()), "jackpot", "&6", "&7Fortune allows you to receive extra drops from ores."));
+
+        gui.i(21, getItem(p, HeadAPI.getHeadById(10250).get().getItem(p.getUniqueId()), "rampage", "&c&l", "&7Fortune allows you to receive extra drops from ores."));
+        gui.i(23, getItem(p, HeadAPI.getHeadById(10250).get().getItem(p.getUniqueId()), "greed", "&2&l", "&7Fortune allows you to receive extra drops from ores."));
+
 
 
 
@@ -63,15 +71,51 @@ public class PickaxeUpgradeInventory {
             NBTManager manager = new NBTManager(p.getItemInHand());
             e.setCancelled(true);
             if(e.getSlot() == 10) {
-                MongoHandler.setValue(p, "level", 0);
-                manager.setNBT("level", PersistentDataType.INTEGER, 0);
+                //if player has enough gems
+                int currentLevel = MongoHandler.getValue(p, "efficiency");
+                MongoHandler.setValue(p, "efficiency", currentLevel + 1);
+                manager.setNBT("efficiency", PersistentDataType.INTEGER, currentLevel + 1);
+                p.getItemInHand().addEnchantment(Enchantment.DIG_SPEED, currentLevel + 1);
             }
             if(e.getSlot() == 11) {
-                MongoHandler.setValue(p, "efficiency", 1);
-                manager.setNBT("efficiency", PersistentDataType.INTEGER, 1);
+
+                int currentLevel = MongoHandler.getValue(p, "fortune");
+                MongoHandler.setValue(p, "fortune", currentLevel + 1);
+                manager.setNBT("fortune", PersistentDataType.INTEGER, currentLevel + 1);
+                p.getItemInHand().addEnchantment(Enchantment.LOOT_BONUS_BLOCKS, currentLevel + 1);
+
             }
             if(e.getSlot() == 12) {
-                manager.setNBT("fortune", PersistentDataType.INTEGER, 1);
+
+                MongoHandler.setValue(p, "shatterproof", MongoHandler.getValue(p, "shatterproof") + 1);
+                manager.setNBT("shatterproof", PersistentDataType.INTEGER, manager.getNBT("shatterproof", PersistentDataType.INTEGER) + 1);
+
+            }
+            if(e.getSlot() == 12) {
+
+                MongoHandler.setValue(p, "shatterproof", MongoHandler.getValue(p, "shatterproof") + 1);
+                manager.setNBT("shatterproof", PersistentDataType.INTEGER, manager.getNBT("shatterproof", PersistentDataType.INTEGER) + 1);
+
+            }
+            if(e.getSlot() == 12) {
+
+                MongoHandler.setValue(p, "shatterproof", MongoHandler.getValue(p, "shatterproof") + 1);
+                manager.setNBT("shatterproof", PersistentDataType.INTEGER, manager.getNBT("shatterproof", PersistentDataType.INTEGER) + 1);
+
+            }
+
+            if(e.getSlot() == 12) {
+
+                MongoHandler.setValue(p, "shatterproof", MongoHandler.getValue(p, "shatterproof") + 1);
+                manager.setNBT("shatterproof", PersistentDataType.INTEGER, manager.getNBT("shatterproof", PersistentDataType.INTEGER) + 1);
+
+            }
+
+            if(e.getSlot() == 12) {
+
+                MongoHandler.setValue(p, "shatterproof", MongoHandler.getValue(p, "shatterproof") + 1);
+                manager.setNBT("shatterproof", PersistentDataType.INTEGER, manager.getNBT("shatterproof", PersistentDataType.INTEGER) + 1);
+
             }
 
         });
@@ -83,6 +127,10 @@ public class PickaxeUpgradeInventory {
 
         Pickaxe pickaxe = new Pickaxe(player);
         String status;
+
+        NBTManager manager = new NBTManager(player.getItemInHand());
+        int level = manager.getNBT(enchantment, PersistentDataType.INTEGER);
+
         //efficieny: 1 pickaxe: 1
         //if enchantment level < pickaxeLevel
         status = (pickaxe.getEnchantmentLevel(player, enchantment) < pickaxe.getPickaxeLevel()) ? " &a&l[AVAILABLE]" : " &3&l[PURCHASED]";
@@ -90,6 +138,9 @@ public class PickaxeUpgradeInventory {
             status = " &c&l[LOCKED]";
         }
         ItemMeta meta = item.getItemMeta();
+        if(enchantment.equals("shatterproof") && level == 1) {
+            status = " &3&l[PURCHASED]";
+        }
         meta.setDisplayName(Util.color(color + enchantment + status));
         List<String> lore = new ArrayList<>();
         lore.add("");
@@ -99,8 +150,7 @@ public class PickaxeUpgradeInventory {
         lore.add("");
         lore.add(Util.color(color + "&l> &7Your Level: &e" + color + pickaxe.getEnchantmentLevel(player, enchantment)));
 
-        NBTManager manager = new NBTManager(player.getItemInHand());
-        int level = manager.getNBT(enchantment, PersistentDataType.INTEGER);
+
 
 
         lore.add(Util.color(color + "&l> &7Cost to Upgrade: " + color + EnchantPrice.getPrice(enchantment, level)));
