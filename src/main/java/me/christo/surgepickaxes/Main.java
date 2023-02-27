@@ -3,6 +3,7 @@ package me.christo.surgepickaxes;
 
 
 import me.christo.surgepickaxes.Commands.PickaxeCommand;
+import me.christo.surgepickaxes.Events.BlockBreak;
 import me.christo.surgepickaxes.Events.JoinEvent;
 import me.christo.surgepickaxes.Events.RightClickEvent;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -33,6 +34,7 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new RightClickEvent(), this);
         getCommand("pickaxe").setExecutor(new PickaxeCommand());
         this.getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+        this.getServer().getPluginManager().registerEvents(new BlockBreak(), this);
 
 
 

@@ -6,7 +6,11 @@ public enum EnchantPrice {
     EFFICIENCY(5, 10, 15, 20, 25),
     GEMFINDER(15, 25, 35, 45, 55),
     JACKPOT(25, 50, 75, 100, 125),
-    SHATTERPROOF(8, 16, 24, 32, 40);
+    SHATTERPROOF(8, 16, 24, 32, 40),
+
+    RAMPAGE(1, 1, 1, 1, 1),
+
+    GREED(1, 1, 1, 1, 1);
 
     private final int[] prices;
 
@@ -17,7 +21,7 @@ public enum EnchantPrice {
     public static int getPrice(String enchant, int level) {
         try {
             EnchantPrice e = EnchantPrice.valueOf(enchant.toUpperCase());
-            return e.prices[level-1];
+            return e.prices[level+1];
         } catch (IllegalArgumentException | NullPointerException e) {
             throw new IllegalArgumentException("Invalid enchantment or level.");
         }

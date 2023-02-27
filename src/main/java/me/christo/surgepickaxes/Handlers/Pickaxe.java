@@ -5,6 +5,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import me.christo.surgepickaxes.Utils.Util;
 import org.bson.Document;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -37,10 +38,10 @@ public class Pickaxe {
     }
 
     public boolean isPickaxe() {
-        if(player.getItemOnCursor().getType() == Material.DIAMOND_PICKAXE) {
-            ItemStack item = player.getItemOnCursor();
+        if(player.getItemInHand().getType() == Material.DIAMOND_PICKAXE) {
+            ItemStack item = player.getItemInHand();
             ItemMeta meta = item.getItemMeta();
-            assert meta != null;
+            Bukkit.broadcastMessage(meta.getDisplayName());
             String name = ChatColor.stripColor(meta.getDisplayName());
             if(name.contains(player.getName())) {
                 return true;
@@ -94,8 +95,14 @@ public class Pickaxe {
         //check if they exist in the mongo db
         //if they do then get their values, if not set.
 
+        int efficiencyLevel = 0;
+        int fortuneLevel = 0;
+        int gemFinder = 0;
+        int shatterProofLevel = 0;
+        int jackPotLevel = 0;
+
         ItemStack item = new ItemStack(Util.createItem(Material.DIAMOND_PICKAXE, "&b&l" + p.getName() + "'s Pickaxe",
-                "&7Efficiency 1", "&7Fortune 1", "" , "&b&lPassive &7&o(Always Active)", "&7Gem Finder 1", "&7Shatter Proof 1",
+                "&7Efficiency 1", "&7Fortune 1", "&7Gem Finder 0" , "&b&lPassive &7&o(Always Active)", "&7Gem Finder 1", "&7Shatter Proof 1",
                 "", "&c&lActive &7&o(Shift + Right Click to Cycle)", "&aRampage &7→ For &a10s &7all blocks will be &a&ninstantly broken.", "&aGreed &7→ For &a10s &7all drops will be &a&ndoubled."));
         ItemMeta meta = item.getItemMeta();
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
