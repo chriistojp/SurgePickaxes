@@ -70,6 +70,8 @@ public enum ExperienceManager {
 
     }
 
+
+
     public static boolean hasEnoughExperience(int level, int pickaxeExperience) {
         switch (level) {
             case 1:

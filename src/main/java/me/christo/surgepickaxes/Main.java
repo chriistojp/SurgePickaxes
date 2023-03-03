@@ -8,6 +8,7 @@ import me.christo.surgepickaxes.Events.JoinEvent;
 import me.christo.surgepickaxes.Events.RightClickEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,11 +22,10 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-//        Logger mongoLogger = Logger.getLogger("org.mongodb.driver");
-//        mongoLogger.setLevel(Level.SEVERE);
-//
-//        Logger rootLogger = Logger.getLogger("");
-//        rootLogger.setLevel(Level.OFF);
+
+        File file = new File(getDataFolder(), "config.yml");
+        if (!file.exists())
+            saveDefaultConfig();
 
         //pasword 1BHVHJ1oKtIicI7l
 

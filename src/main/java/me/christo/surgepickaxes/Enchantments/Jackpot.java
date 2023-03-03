@@ -62,7 +62,7 @@ public class Jackpot {
         for (int i = 1; i <= level; i++) {
             double totalProb = 0.0;
             for (double probability : tierProbabilities) {
-                probability += (i - 1) * 0.01; // Increase probability by 1% for each level above 1
+                probability += (i - 1) * 0.0  - 1; // Increase probability by 1% for each level above 1
                 totalProb += probability;
             }
             double randNum = rand.nextDouble() * totalProb;

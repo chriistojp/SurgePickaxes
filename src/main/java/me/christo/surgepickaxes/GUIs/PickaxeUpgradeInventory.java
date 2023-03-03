@@ -1,8 +1,7 @@
 package me.christo.surgepickaxes.GUIs;
 
-import me.christo.surgepickaxes.Handlers.MongoHandler;
-import me.christo.surgepickaxes.Handlers.NBTManager;
-import me.christo.surgepickaxes.Handlers.Pickaxe;
+import me.christo.surgepickaxes.Enchantments.GemFinder;
+import me.christo.surgepickaxes.Handlers.*;
 import me.christo.surgepickaxes.Utils.EnchantPrice;
 import me.christo.surgepickaxes.Utils.Gui;
 import me.christo.surgepickaxes.Utils.Util;
@@ -13,6 +12,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+import skysurge.net.Objects.SurgePlayer;
+import skysurge.net.Utils.GemUtils;
 import tsp.headdb.core.api.HeadAPI;
 
 import java.util.ArrayList;
@@ -56,7 +57,17 @@ public class PickaxeUpgradeInventory {
         gui.i(14, getItem(p, HeadAPI.getHeadById(10250).get().getItem(p.getUniqueId()), "shatterproof", "&b", "&7Fortune allows you to receive extra drops from ores."));
         gui.i(15, getItem(p, HeadAPI.getHeadById(18628).get().getItem(p.getUniqueId()), "jackpot", "&6", "&7Fortune allows you to receive extra drops from ores."));
 
+
         gui.i(21, getItem(p, HeadAPI.getHeadById(17088).get().getItem(p.getUniqueId()), "rampage", "&c&l", "&7Fortune allows you to receive extra drops from ores."));
+
+        NBTManager manager = new NBTManager(p.getItemInHand());
+        if(ExperienceManager.hasEnoughExperience(manager.getNBT("level", PersistentDataType.INTEGER), manager.getNBT("xp", PersistentDataType.INTEGER))) {
+            gui.i(22, Material.DIAMOND_PICKAXE, "&b&l" + p.getName() + "'s Pickaxe &a&l[UPGRADE]", "", "lore blah costs 300 gems blah");
+        } else {
+            gui.i(22, Material.BARRIER, "&b&l" + p.getName() + " 's Pickaxe &c&l[UNAVAILABLE]", "", "you need more xp bro.");
+        }
+
+
         gui.i(23, getItem(p, HeadAPI.getHeadById(23869).get().getItem(p.getUniqueId()), "greed", "&2&l", "&7Fortune allows you to receive extra drops from ores."));
 
 
@@ -68,7 +79,7 @@ public class PickaxeUpgradeInventory {
 
 
         gui.onClick(e -> {
-            NBTManager manager = new NBTManager(p.getItemInHand());
+           // NBTManager manager = new NBTManager(p.getItemInHand());
             e.setCancelled(true);
             if(e.getSlot() == 10) {
                 //if player has enough gems
@@ -115,6 +126,23 @@ public class PickaxeUpgradeInventory {
 
                 MongoHandler.setValue(p, "shatterproof", MongoHandler.getValue(p, "shatterproof") + 1);
                 manager.setNBT("shatterproof", PersistentDataType.INTEGER, manager.getNBT("shatterproof", PersistentDataType.INTEGER) + 1);
+
+            }
+
+            if(e.getSlot() == 22) {
+
+                if(e.getCurrentItem().getType() == Material.BARRIER) {
+                    e.setCancelled(true);
+                } else {
+                    int level = new NBTManager(p.getItemInHand()).getNBT("level", PersistentDataType.INTEGER);
+                    int cost = UpgradeCost.getCostForLevel(level + 1);
+                    SurgePlayer player = new SurgePlayer(p.getUniqueId());
+                    if(player.getGems() > cost) {
+
+                    }
+
+                }
+
 
             }
 

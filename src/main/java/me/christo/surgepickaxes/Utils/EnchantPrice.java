@@ -18,6 +18,8 @@ public enum EnchantPrice {
         prices = new int[] { level1, level2, level3, level4, level5 };
     }
 
+
+
     public static int getPrice(String enchant, int level) {
         try {
             EnchantPrice e = EnchantPrice.valueOf(enchant.toUpperCase());

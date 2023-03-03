@@ -1,7 +1,9 @@
 package me.christo.surgepickaxes.Utils;
 
+import me.christo.surgepickaxes.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -40,6 +42,12 @@ public class Util {
 
 
         return item;
+
+    }
+
+    public static void sendConfigMessage(Player p, String location) {
+
+        p.sendMessage(Util.color(Main.getInstance().getConfig().getString("messages. " + location)));
 
     }
 
