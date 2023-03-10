@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Greed {
-    private static final int DURATION = 10; // Duration of the "greed" effect in seconds
+    private static final int DURATION = 100000; // Duration of the "greed" effect in seconds
     private static final double MULTIPLIER = 2.0; // Multiplier for the "greed" effect
     private static final Map<UUID, Long> activePlayers = new HashMap<>(); // Map of active players and their expiration times
 

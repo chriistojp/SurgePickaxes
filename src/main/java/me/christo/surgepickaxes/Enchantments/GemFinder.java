@@ -22,13 +22,13 @@ public class GemFinder {
                 chance = 15;
                 break;
             case 5:
-                chance = 20;
+                chance = 100;
                 break;
             default:
                 return false;
         }
 
-        return rand.nextInt(100) < chance;
+        return rand.nextInt(100) <= chance;
     }
 
     public static int generateRandomNumber() {

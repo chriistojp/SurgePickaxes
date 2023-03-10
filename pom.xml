@@ -79,13 +79,20 @@
             <artifactId>mongodb-driver-sync</artifactId>
             <version>3.12.12</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>headb</groupId>-->
-<!--            <artifactId>no</artifactId>-->
-<!--            <version>1.0</version>-->
-<!--            <scope>system</scope>-->
-<!--            <systemPath>${project.basedir}/src/main/resources/HeadDB.jar</systemPath>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>headb</groupId>
+            <artifactId>no</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/HeadDB (1).jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>cooldowns</groupId>
+            <artifactId>no</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/SurgeCooldowns.jar</systemPath>
+        </dependency>
         <dependency>
             <groupId>com.github.SkySurge-Network</groupId>
             <artifactId>Core</artifactId>

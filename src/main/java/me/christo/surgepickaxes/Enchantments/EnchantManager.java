@@ -1,6 +1,8 @@
 package me.christo.surgepickaxes.Enchantments;
 
 import me.christo.surgepickaxes.Handlers.NBTManager;
+import me.christo.surgepickaxes.Main;
+import me.christo.surgepickaxes.Utils.Util;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
 
@@ -15,6 +17,7 @@ public class EnchantManager {
 
         if(GemFinder.getProc(gemFinderLevel)) {
             int gems = GemFinder.generateRandomNumber();
+            p.sendMessage(Util.color(Main.getInstance().getConfig().getString("messages.gemsFound").replaceAll("%gems%", gems + "")));
             //give player gems and send message
         }
         if(Jackpot.getProc(jackpotLevel)) {

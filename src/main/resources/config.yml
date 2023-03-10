@@ -1,0 +1,3 @@
+messages:
+  upgradedEnchantment: "&7you upgraded %enchant% to level %level% no kizzy."
+  gemsFound: "&7You found %gems% gems."

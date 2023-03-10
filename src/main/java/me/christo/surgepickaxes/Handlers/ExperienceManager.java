@@ -1,5 +1,7 @@
 package me.christo.surgepickaxes.Handlers;
 
+import me.christo.surgepickaxes.Utils.Util;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataType;
@@ -53,19 +55,19 @@ public enum ExperienceManager {
         }
     }
 
-    public static void increaseExperience(Player player, int xp, NBTManager manager) {
+    public static void increaseExperience( Player player, int xp, NBTManager manager) {
 
+        boolean hadEnoughBefore = hasEnoughExperience(manager.getNBT("level", PersistentDataType.INTEGER) + 1, manager.getNBT("xp", PersistentDataType.INTEGER));
+        Bukkit.broadcastMessage("level" + manager.getNBT("level", PersistentDataType.INTEGER) + "before xp: " + manager.getNBT("xp", PersistentDataType.INTEGER));
         manager.setNBT("xp", PersistentDataType.INTEGER, manager.getNBT("xp", PersistentDataType.INTEGER) + xp);
+        boolean hadEnoughAfter = hasEnoughExperience(manager.getNBT("level", PersistentDataType.INTEGER) + 1, manager.getNBT("xp", PersistentDataType.INTEGER));
+        Bukkit.broadcastMessage("level" + manager.getNBT("level", PersistentDataType.INTEGER) + "before xp: " + manager.getNBT("xp", PersistentDataType.INTEGER));
 
-        if(hasEnoughExperience(manager.getNBT("level", PersistentDataType.INTEGER), manager.getNBT("xp", PersistentDataType.INTEGER))) {
+        Bukkit.broadcastMessage(hadEnoughBefore + " before");
+        Bukkit.broadcastMessage(hadEnoughAfter + " after");
 
-            int level = manager.getNBT("level", PersistentDataType.INTEGER);
-            manager.setNBT("level", PersistentDataType.INTEGER, level + 1);
-            manager.setNBT("xp", PersistentDataType.INTEGER, 0);
-
-            MongoHandler.setValue(player, "level", level + 1);
-            player.sendMessage("you levelled up");
-
+        if(!hadEnoughBefore && hadEnoughAfter) {
+            player.sendTitle(Util.color("&a&LUPGRADE"), Util.color("&fYour pickaxe is upgrade elligible!"), 40, 40, 40);
         }
 
     }

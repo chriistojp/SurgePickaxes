@@ -18,7 +18,7 @@ public class PickaxeInventory {
         //14661 book - 13
         //14832 experience - 15
         Gui gui = new Gui("Pickaxe", 27);
-        HeadAPI.getHeadById(14673).get().getItem(p.getUniqueId());
+         HeadAPI.getHeadById(14673).get().getItem(p.getUniqueId());
         gui.fill(Material.BLACK_STAINED_GLASS_PANE, " ");
 
         String[] enchantLore = {

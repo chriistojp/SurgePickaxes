@@ -11,7 +11,7 @@ public class Rampage {
 
     public static void enableHaste(Player player) {
         // Apply the Haste effect to the player
-        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, DURATION * 20, 2));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, DURATION * 20, 30));
     }
 
     public static void disableHaste(Player player) {

@@ -20,8 +20,14 @@ public class PickaxeCommand implements CommandExecutor {
             if(args.length == 0) {
                 Player player = (Player) sender;
 
-                Pickaxe.givePickaxe(player);
-                PickaxeInventory.open(player);
+                Pickaxe pickaxe = new Pickaxe(player);
+                if(pickaxe.isPickaxe(player)) {
+                    PickaxeInventory.open(player);
+                }
+                if(!Pickaxe.checkForPicaxe(player)) {
+                    Pickaxe.givePickaxe(player);
+                }
+
 
                 Bukkit.broadcastMessage("hi" + new NBTManager(player.getItemInHand()).getNBT("jackpot", PersistentDataType.INTEGER) + "");
 
@@ -31,9 +37,35 @@ public class PickaxeCommand implements CommandExecutor {
 
             }
             if(args.length == 1) {
-                MongoHandler.setValue(((Player) sender).getPlayer(), "level", 0);
-                MongoHandler.setValue(((Player) sender).getPlayer(), "efficiency", 0);
-                MongoHandler.setValue(((Player) sender).getPlayer(), "fortune", 0);
+                if(args[0].equals("reset")) {
+                    MongoHandler.setValue(((Player) sender).getPlayer(), "level", 0);
+                    MongoHandler.setValue(((Player) sender).getPlayer(), "efficiency", 0);
+                    MongoHandler.setValue(((Player) sender).getPlayer(), "fortune", 0);
+                    MongoHandler.setValue(((Player) sender).getPlayer(), "gemfinder", 0);
+                    MongoHandler.setValue(((Player) sender).getPlayer(), "jackpot", 0);
+                    MongoHandler.setValue(((Player) sender).getPlayer(), "rampage", 0);
+                    MongoHandler.setValue(((Player) sender).getPlayer(), "greed", 0);
+                    MongoHandler.setValue(((Player) sender).getPlayer(), "shatterproof", 0);
+
+                    NBTManager manager = new NBTManager(((Player) sender).getItemInHand());
+                    manager.setNBT("level", PersistentDataType.INTEGER, 0);
+                    manager.setNBT("efficiency", PersistentDataType.INTEGER, 0);
+                    manager.setNBT("fortune", PersistentDataType.INTEGER, 0);
+                    manager.setNBT("gemfinder", PersistentDataType.INTEGER, 0);
+                    manager.setNBT("greed", PersistentDataType.INTEGER, 0);
+                    manager.setNBT("jackpot", PersistentDataType.INTEGER, 0);
+                    manager.setNBT("rampage", PersistentDataType.INTEGER, 0);
+                    manager.setNBT("shatterproof", PersistentDataType.INTEGER, 0);
+                }
+                if(args[0].equals("give")) {
+                    Pickaxe.givePickaxe(((Player) sender).getPlayer());
+                }
+                if(args[0].equals("level")) {
+                    NBTManager manager = new NBTManager(((Player) sender).getItemInHand());
+                    manager.setNBT("level", PersistentDataType.INTEGER, 5);
+                    MongoHandler.setValue(((Player) sender).getPlayer(), "level", 5);
+
+                }
             }
             if(args.length == 2) {
 
