@@ -40,7 +40,20 @@ public class Pickaxe {
 
     }
 
-    public boolean isPickaxe(Player player) {
+    public static boolean isPickaxe(Player player) {
+        if (player.getItemInHand() != null) {
+            if (player.getItemInHand().getType() == Material.DIAMOND_PICKAXE) {
+                ItemStack item = player.getItemInHand();
+                ItemMeta meta = item.getItemMeta();
+                String name = ChatColor.stripColor(meta.getDisplayName());
+                if (name.contains(player.getName())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean isPickaxe() {
         if (player.getItemInHand() != null) {
             if (player.getItemInHand().getType() == Material.DIAMOND_PICKAXE) {
                 ItemStack item = player.getItemInHand();
@@ -181,6 +194,8 @@ public class Pickaxe {
         int gemFinderLevel = MongoHandler.getValue(p, "gemfinder");
         int shatterProofLevel = MongoHandler.getValue(p, "shatterproof");
         int jackpotLevel = MongoHandler.getValue(p, "jackpot");
+        int rampageLevel = MongoHandler.getValue(p, "rampage");
+        int greedLevel = MongoHandler.getValue(p, "greed");
 
         ItemStack item = new ItemStack(Util.createItem(Material.DIAMOND_PICKAXE, "&b&l" + p.getName() + "'s Pickaxe &7(Level " + level + "&7)",
                 "&7Efficiency " + efficiencyLevel, "&7Fortune " + fortuneLevel, "&7Gem Finder " + gemFinderLevel, "&7Shatterproof " + shatterProofLevel, "&7Jackpot " + jackpotLevel,
@@ -190,19 +205,20 @@ public class Pickaxe {
         item.setItemMeta(meta);
 
         NBTManager nbtManager = new NBTManager(item);
-        nbtManager.setNBT("level", PersistentDataType.INTEGER, 0);
+        nbtManager.setNBT("level", PersistentDataType.INTEGER, level);
         nbtManager.setNBT("xp", PersistentDataType.INTEGER, 0);
-        nbtManager.setNBT("efficiency", PersistentDataType.INTEGER, 0);
-        nbtManager.setNBT("fortune", PersistentDataType.INTEGER, 0);
-        nbtManager.setNBT("shatterproof", PersistentDataType.INTEGER, 0);
-        nbtManager.setNBT("jackpot", PersistentDataType.INTEGER, 0);
-        nbtManager.setNBT("rampage", PersistentDataType.INTEGER, 0);
-        nbtManager.setNBT("gemfinder", PersistentDataType.INTEGER, 0);
-        nbtManager.setNBT("greed", PersistentDataType.INTEGER, 0);
+        nbtManager.setNBT("efficiency", PersistentDataType.INTEGER, efficiencyLevel);
+        nbtManager.setNBT("fortune", PersistentDataType.INTEGER, fortuneLevel);
+        nbtManager.setNBT("shatterproof", PersistentDataType.INTEGER, shatterProofLevel);
+        nbtManager.setNBT("jackpot", PersistentDataType.INTEGER, gemFinderLevel);
+        nbtManager.setNBT("rampage", PersistentDataType.INTEGER, rampageLevel);
+        nbtManager.setNBT("gemfinder", PersistentDataType.INTEGER, gemFinderLevel);
+        nbtManager.setNBT("greed", PersistentDataType.INTEGER, greedLevel);
 
 
         p.getInventory().addItem(item);
 
 
     }
+
 }

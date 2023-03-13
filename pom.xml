@@ -84,7 +84,7 @@
             <artifactId>no</artifactId>
             <version>1.0</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/HeadDB (1).jar</systemPath>
+            <systemPath>${project.basedir}/src/main/resources/HeadDB.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>cooldowns</groupId>

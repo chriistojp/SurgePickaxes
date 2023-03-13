@@ -1,7 +1,8 @@
 package me.christo.surgepickaxes.GUIs;
 
-import me.christo.surgepickaxes.Enchantments.GemFinder;
 import me.christo.surgepickaxes.Handlers.*;
+import me.christo.surgepickaxes.Handlers.Experience.ExperienceManager;
+import me.christo.surgepickaxes.Handlers.Experience.PickaxeUpgradeExperience;
 import me.christo.surgepickaxes.Main;
 import me.christo.surgepickaxes.Utils.EnchantPrice;
 import me.christo.surgepickaxes.Utils.Gui;
@@ -14,7 +15,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import skysurge.net.Objects.SurgePlayer;
-import skysurge.net.Utils.GemUtils;
 import tsp.headdb.core.api.HeadAPI;
 
 import java.util.ArrayList;
@@ -50,10 +50,39 @@ public class PickaxeUpgradeInventory {
 
 
         NBTManager manager = new NBTManager(p.getItemInHand());
-        if(ExperienceManager.hasEnoughExperience(manager.getNBT("level", PersistentDataType.INTEGER) + 1, manager.getNBT("xp", PersistentDataType.INTEGER))) {
-            gui.i(22, Material.DIAMOND_PICKAXE, "&b&l" + p.getName() + "'s Pickaxe &a&l[UPGRADE]", "", "lore blah costs 300 gems blah");
+        if(manager.getNBT("level", PersistentDataType.INTEGER) == 5) {
+
+            ItemStack item = new ItemStack(p.getItemInHand());
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(meta.getDisplayName() + Util.color(" &6&l[MAX LEVEL]"));
+            item.setItemMeta(meta);
+            gui.i(22, item);
+
+        } else if(ExperienceManager.hasEnoughExperience(manager.getNBT("level", PersistentDataType.INTEGER) + 1, manager.getNBT("xp", PersistentDataType.INTEGER))) {
+            ItemStack item = new ItemStack(p.getItemInHand());
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(meta.getDisplayName() + Util.color(" &a&l[UPGRADE]"));
+            List<String> lore = meta.getLore();
+            lore.add("");
+            lore.add(Util.color("&3&l[COST] » &7") + UpgradeCost.getCostForLevel(manager.getNBT("level", PersistentDataType.INTEGER) + 1) + " Gems");
+            meta.setLore(lore);
+            item.setItemMeta(meta);
+            gui.i(22, item);
         } else {
-            gui.i(22, Material.BARRIER, "&b&l" + p.getName() + " 's Pickaxe &c&l[UNAVAILABLE]", "", "you need more xp bro.");
+
+
+            int remainingXP = PickaxeUpgradeExperience.getCostForLevel(manager.getNBT("level", PersistentDataType.INTEGER) + 1) - manager.getNBT("xp", PersistentDataType.INTEGER);
+
+
+            ItemStack item = new ItemStack(p.getItemInHand());
+            ItemMeta meta = item.getItemMeta();
+            meta.setDisplayName(meta.getDisplayName() + Util.color(" &c&l[UNAVAILABLE]"));
+            List<String> lore = meta.getLore();
+            lore.add("");
+            lore.add(Util.color("&c&l[XP REMAINING] &7» &c" + remainingXP + " &7XP"));
+            meta.setLore(lore);
+            item.setItemMeta(meta);
+            gui.i(22, item);
         }
 
 
@@ -173,7 +202,7 @@ public class PickaxeUpgradeInventory {
 
             if(e.getSlot() == 22) {
 
-                if(e.getCurrentItem().getType() == Material.BARRIER) {
+                if(e.getCurrentItem().getItemMeta().getDisplayName().contains("UNAVAILABLE")) {
                     e.setCancelled(true);
                 } else {
                     int level = new NBTManager(p.getItemInHand()).getNBT("level", PersistentDataType.INTEGER);

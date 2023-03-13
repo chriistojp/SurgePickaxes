@@ -2,7 +2,7 @@ package me.christo.surgepickaxes.Events;
 
 import me.christo.surgepickaxes.Enchantments.EnchantManager;
 import me.christo.surgepickaxes.Enchantments.Greed;
-import me.christo.surgepickaxes.Handlers.ExperienceManager;
+import me.christo.surgepickaxes.Handlers.Experience.ExperienceManager;
 import me.christo.surgepickaxes.Handlers.NBTManager;
 import me.christo.surgepickaxes.Handlers.Pickaxe;
 import org.bukkit.Bukkit;
@@ -17,8 +17,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
 
 public class BlockBreak implements Listener {
 

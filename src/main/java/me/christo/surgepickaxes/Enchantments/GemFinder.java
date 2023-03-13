@@ -1,5 +1,7 @@
 package me.christo.surgepickaxes.Enchantments;
 
+import org.bukkit.Bukkit;
+
 import java.util.Random;
 
 public class GemFinder {
@@ -22,7 +24,7 @@ public class GemFinder {
                 chance = 15;
                 break;
             case 5:
-                chance = 100;
+                chance = 20;
                 break;
             default:
                 return false;
@@ -33,6 +35,6 @@ public class GemFinder {
 
     public static int generateRandomNumber() {
         Random rand = new Random();
-        return rand.nextInt(1000) + 1;
+        return rand.nextInt(500) + 1;
     }
 }

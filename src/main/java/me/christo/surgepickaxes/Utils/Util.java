@@ -80,6 +80,13 @@ public class Util {
         return outputList;
     }
 
+    public static void sendMessage(Player player, String message) {
+
+        player.sendMessage("丠            ");
+        player.sendMessage("              " + color(message));
+        player.sendMessage("");
+    }
+
 
 
 

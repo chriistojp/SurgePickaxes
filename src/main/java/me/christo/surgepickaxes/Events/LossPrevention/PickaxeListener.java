@@ -1,7 +1,9 @@
 package me.christo.surgepickaxes.Events.LossPrevention;
 
 
+import me.christo.surgepickaxes.Handlers.Pickaxe;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import org.bukkit.event.EventHandler;
@@ -12,38 +14,39 @@ import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public class PickxeListener implements Listener{
+public class PickaxeListener implements Listener{
 
     @EventHandler
     public void onItemDrop(PlayerDropItemEvent event) {
-        ItemStack item = event.getItemDrop().getItemStack();
-        if (isPickaxe(item) && !isPlayersPickaxe(event.getPlayer(), item)) {
+        if (Pickaxe.isPickaxe(event.getPlayer())) {
             event.setCancelled(true);
+        } else {
+            event.getPlayer().sendMessage(":(");
         }
     }
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        ItemStack item = event.getCurrentItem();
-        if (isPickaxe(item) && !isPlayersPickaxe((Player) event.getWhoClicked(), item)) {
+        if (Pickaxe.isPickaxe((Player) event.getWhoClicked())) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onInventoryMoveItem(InventoryMoveItemEvent event) {
-        ItemStack item = event.getItem();
-        if (isPickaxe(item) && !isPlayersPickaxe((Player) event.getInitiator(), item)) {
+
+
+        if (Pickaxe.isPickaxe((Player) event.getInitiator())) {
             event.setCancelled(true);
         }
+
     }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         for (ItemStack item : event.getDrops()) {
-            if (isPickaxe(item) && !isPlayersPickaxe(event.getEntity(), item)) {
+            if (item.getType().equals(Material.DIAMOND_PICKAXE)) {
                 event.getDrops().remove(item);
             }
         }

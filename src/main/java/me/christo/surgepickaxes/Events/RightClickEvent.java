@@ -54,14 +54,15 @@ public class RightClickEvent implements Listener {
                             enchantmentActive = true;
 
                             AtomicInteger secondsLeft = new AtomicInteger(10);
+                            if(keys[index].equals("Rampage")) {
+                                Rampage.enableHaste(player);
+                            }
+                            if(keys[index].equals("Greed")) {
+                                Greed.enable(player);
+                            }
                             int taskID = Main.getInstance().getServer().getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), () -> {
                                 player.sendTitle("", Util.color("&a&l" + keys[index] + " &factivated for &a" + secondsLeft + "&f seconds!"));
-                                if(keys[index].equals("Rampage")) {
-                                    Rampage.enableHaste(player);
-                                }
-                                if(keys[index].equals("Greed")) {
-                                    Greed.enable(player);
-                                }
+
                                 secondsLeft.getAndDecrement();
                             }, 0, 20);
 
