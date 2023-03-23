@@ -2,15 +2,15 @@ package me.christo.surgepickaxes.Utils;
 
 public enum EnchantPrice {
 
-    EFFICIENCY(1, 2, 3, 4, 5, 0),
-    FORTUNE(10, 20, 30, 0, 0, 0),
-    GEMFINDER(15, 25, 35, 45, 55, 0),
-    JACKPOT(25, 50, 75, 100, 125, 0),
-    SHATTERPROOF(8, 0, 0, 0, 0, 0),
+    EFFICIENCY(50, 200, 500, 1000, 3000, 0),
+    FORTUNE(750, 1500, 3000, 0, 0, 0),
+    GEMFINDER(100, 400, 1000, 2000, 4000, 0),
+    JACKPOT(100, 400, 1000, 2000, 4000, 0),
+    SHATTERPROOF(500, 0, 0, 0, 0, 0),
 
-    RAMPAGE(1, 0, 0, 0, 0, 0),
+    RAMPAGE(5000, 0, 0, 0, 0, 0),
 
-    GREED(1, 0, 0, 0, 0, 0);
+    GREED(5000, 0, 0, 0, 0, 0);
 
     private final int[] prices;
 

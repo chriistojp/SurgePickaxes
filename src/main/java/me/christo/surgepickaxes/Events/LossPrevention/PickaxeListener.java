@@ -19,10 +19,8 @@ public class PickaxeListener implements Listener{
 
     @EventHandler
     public void onItemDrop(PlayerDropItemEvent event) {
-        if (Pickaxe.isPickaxe(event.getPlayer())) {
+        if(Pickaxe.isPickaxe(event.getPlayer(), event.getItemDrop().getItemStack())) {
             event.setCancelled(true);
-        } else {
-            event.getPlayer().sendMessage(":(");
         }
     }
 

@@ -59,13 +59,9 @@ public enum ExperienceManager {
     public static void increaseExperience( Player player, int xp, NBTManager manager) {
 
         boolean hadEnoughBefore = hasEnoughExperience(manager.getNBT("level", PersistentDataType.INTEGER) + 1, manager.getNBT("xp", PersistentDataType.INTEGER));
-        Bukkit.broadcastMessage("level" + manager.getNBT("level", PersistentDataType.INTEGER) + "before xp: " + manager.getNBT("xp", PersistentDataType.INTEGER));
         manager.setNBT("xp", PersistentDataType.INTEGER, manager.getNBT("xp", PersistentDataType.INTEGER) + xp);
         boolean hadEnoughAfter = hasEnoughExperience(manager.getNBT("level", PersistentDataType.INTEGER) + 1, manager.getNBT("xp", PersistentDataType.INTEGER));
-        Bukkit.broadcastMessage("level" + manager.getNBT("level", PersistentDataType.INTEGER) + "before xp: " + manager.getNBT("xp", PersistentDataType.INTEGER));
 
-        Bukkit.broadcastMessage(hadEnoughBefore + " before");
-        Bukkit.broadcastMessage(hadEnoughAfter + " after");
 
         if(!hadEnoughBefore && hadEnoughAfter) {
             player.sendTitle(Util.color("&a&LUPGRADE"), Util.color("&fYour pickaxe is upgrade elligible!"), 40, 40, 40);

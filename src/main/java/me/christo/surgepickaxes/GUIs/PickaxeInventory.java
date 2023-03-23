@@ -40,7 +40,7 @@ public class PickaxeInventory {
                 "&7Here you can do things like &6upgrade &7your pickaxe.",
                 "&7Upgrading your pickaxe can help you gain resources",
                 "&7and island value faster. Custom pickaxe enchantments only work",
-                "on &6Ore-Field &7generated blocks.",
+                "&7on &6Ore-Field &7generated blocks.",
                 "",
                 "&7If you have any questions feel free to &6ask a staff member."
 

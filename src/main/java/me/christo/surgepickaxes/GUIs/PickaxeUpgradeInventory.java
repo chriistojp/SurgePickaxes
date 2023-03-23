@@ -108,7 +108,6 @@ public class PickaxeUpgradeInventory {
                     int currentLevel = manager.getNBT("efficiency", PersistentDataType.INTEGER);
                     MongoHandler.setValue(p, "efficiency", currentLevel + 1);
                     manager.setNBT("efficiency", PersistentDataType.INTEGER, currentLevel + 1);
-                    Bukkit.broadcastMessage("Current Level + 1 = " + (currentLevel + 1));
                     p.getItemInHand().addEnchantment(Enchantment.DIG_SPEED, currentLevel + 1);
                     Pickaxe.refreshPickaxeEnchants(p);
 
@@ -124,7 +123,6 @@ public class PickaxeUpgradeInventory {
 
            
                 if(pickaxe.isEligibleForEnchantment("fortune")) {
-                    Bukkit.broadcastMessage("eligibile");
 
                     int currentLevel = manager.getNBT("fortune", PersistentDataType.INTEGER);
                     if(EnchantPrice.getPrice("fortune", currentLevel + 1) >= player.getGems()) {
@@ -209,9 +207,7 @@ public class PickaxeUpgradeInventory {
                     int cost = UpgradeCost.getCostForLevel(level + 1);
                     player.addGems(10000);
                     if(player.getGems() > cost) {
-                        Bukkit.broadcastMessage("2");
                         if(level < 5) {
-                            Bukkit.broadcastMessage("3");
                             new NBTManager(p.getItemInHand()).setNBT("level",  PersistentDataType.INTEGER, level + 1);
                             new NBTManager(p.getItemInHand()).setNBT("xp",  PersistentDataType.INTEGER, 0);
                             MongoHandler.setValue(p, "level", level + 1);

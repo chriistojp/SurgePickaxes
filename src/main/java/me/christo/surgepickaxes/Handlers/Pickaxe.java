@@ -53,6 +53,20 @@ public class Pickaxe {
         }
         return false;
     }
+
+    public static boolean isPickaxe(Player player, ItemStack item) {
+
+        if(item.hasItemMeta()) {
+            if(item.getItemMeta().hasDisplayName()) {
+                if(item.getItemMeta().getDisplayName().contains(player.getName())) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+    }
     public boolean isPickaxe() {
         if (player.getItemInHand() != null) {
             if (player.getItemInHand().getType() == Material.DIAMOND_PICKAXE) {
@@ -136,7 +150,6 @@ public class Pickaxe {
                 if (player.getInventory().getItem(i).getType() == Material.DIAMOND_PICKAXE) {
                     ItemStack item = player.getInventory().getItem(i);
                     ItemMeta meta = item.getItemMeta();
-                    Bukkit.broadcastMessage(meta.getDisplayName());
                     String name = ChatColor.stripColor(meta.getDisplayName());
                     if (name.contains(player.getName())) {
                         return true;
@@ -169,7 +182,6 @@ public class Pickaxe {
 
         ItemStack item = player.getItemInHand();
         ItemMeta meta = item.getItemMeta();
-        Bukkit.broadcastMessage(meta.getLore().get(0));
         List<String> lore = meta.getLore();
         lore.set(0, Util.color("&7Efficiency " + efficiencyLevel));
         lore.set(1, Util.color("&7Fortune " + fortuneLevel));

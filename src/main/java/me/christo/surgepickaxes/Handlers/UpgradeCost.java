@@ -1,11 +1,11 @@
 package me.christo.surgepickaxes.Handlers;
 
 public enum UpgradeCost {
-    LEVEL_1(200),
-    LEVEL_2(500),
-    LEVEL_3(1000),
-    LEVEL_4(3000),
-    LEVEL_5(5000);
+    LEVEL_1(500),
+    LEVEL_2(1000),
+    LEVEL_3(2000),
+    LEVEL_4(4000),
+    LEVEL_5(8000);
 
     private final int cost;
 

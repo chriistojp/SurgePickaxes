@@ -3,6 +3,7 @@ package me.christo.surgepickaxes.Events;
 import me.christo.surgecooldowns.Managers.CooldownManager;
 import me.christo.surgepickaxes.Enchantments.Greed;
 import me.christo.surgepickaxes.Enchantments.Rampage;
+import me.christo.surgepickaxes.GUIs.PickaxeInventory;
 import me.christo.surgepickaxes.Handlers.Pickaxe;
 import me.christo.surgepickaxes.Main;
 import me.christo.surgepickaxes.Utils.Util;
@@ -40,6 +41,7 @@ public class RightClickEvent implements Listener {
                     Long clickTime;
 
                     if (e.getPlayer().isSneaking()) {
+
                         time = System.currentTimeMillis();
 
                         index = (index + 1) % titles.length;
@@ -49,6 +51,12 @@ public class RightClickEvent implements Listener {
 
                     } else {
                         clickTime = System.currentTimeMillis();
+
+
+                        if(this.time == null) {
+                            PickaxeInventory.open(player);
+                            return;
+                        }
 
                         if (clickTime - time < 1000 && !manager.isOnCooldown(player, cooldownType)) {
                             enchantmentActive = true;
@@ -77,10 +85,11 @@ public class RightClickEvent implements Listener {
 
                                 manager.setCooldown(player, cooldownType, 5); // set cooldown
                                 enchantmentActive = false;
+                                this.time = null;
                             }, 200);
 
                         } else if (manager.isOnCooldown(player, cooldownType)) {
-                            player.sendTitle(Util.color("&c&lCOOLDOWN"), Util.color("&c") + manager.getTimeLeft(player, cooldownType) + " &fseconds remaining!");
+                            player.sendTitle(Util.color("&c&lCOOLDOWN"), Util.color("&c") + manager.getTimeLeft(player, cooldownType) + Util.color(" &fseconds remaining!"));
                         }
                     }
                 }

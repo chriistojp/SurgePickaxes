@@ -29,7 +29,6 @@ public class PickaxeCommand implements CommandExecutor {
                 }
 
 
-                Bukkit.broadcastMessage("hi" + new NBTManager(player.getItemInHand()).getNBT("jackpot", PersistentDataType.INTEGER) + "");
 
                 for(String s :  Util.formatString(50, "", "&7Here you can do things like &6upgrade your pickaxe.", "&7Upgrading your pickaxe can help you gain", "&7resources and island value faster.", "&7Pickaxe enchantments only work on &6Ore-Field &7generated blocks.", "", "&7If you have any questions feel free", "&6to ask a staff member.")) {
                     System.out.println(s);

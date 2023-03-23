@@ -14,7 +14,6 @@ public class EnchantManager {
 
         NBTManager manager = new NBTManager(p.getItemInHand());
         int gemFinderLevel = manager.getNBT("gemfinder", PersistentDataType.INTEGER);
-        Bukkit.broadcastMessage("gem finder level" + gemFinderLevel);
         int jackpotLevel = manager.getNBT("gemfinder", PersistentDataType.INTEGER);
 
         if(GemFinder.getProc(gemFinderLevel)) {

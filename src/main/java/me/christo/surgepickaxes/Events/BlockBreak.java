@@ -46,7 +46,6 @@ public class BlockBreak implements Listener {
                     int xp = ExperienceManager.getExperience(event.getBlock().getType());
                     ExperienceManager.increaseExperience(player, xp, manager);
 
-                    Bukkit.broadcastMessage("XP: " + xp + " Pickaxe XP: " + manager.getNBT("xp", PersistentDataType.INTEGER));
                 }
             }
         }
